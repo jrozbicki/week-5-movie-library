@@ -6,12 +6,14 @@ import ReduxPromise from "redux-promise";
 
 import MovieList from "./containers/movie-list.js";
 import Categories from "./containers/categories.js";
+import SearchBar from "./containers/search-bar.js";
 import reducers from "./reducers";
 
 class App extends Component {
   render() {
     return (
       <div>
+        <SearchBar />
         <Categories />
         <MovieList />
       </div>
