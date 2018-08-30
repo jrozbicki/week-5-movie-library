@@ -2,7 +2,9 @@ import axios from "axios";
 
 export const FETCH_MOVIES = "FETCH_MOVIES";
 export const FETCH_MOVIE = "FETCH_MOVIE";
+export const FETCH_GENRES = "FETCH_GENRES";
 export const CHANGE_TYPE = "CHANGE_TYPE";
+
 const API_KEY = "fd067333da9722a67e0a78739ccecbf1";
 
 export function fetchData(category) {
@@ -16,11 +18,21 @@ export function fetchData(category) {
 }
 
 export function fetchMovie(title) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${title}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${title}&language=en-US`;
   const request = axios.get(url);
 
   return {
     type: FETCH_MOVIE,
+    payload: request
+  };
+}
+
+export function fetchGenres() {
+  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+  const request = axios.get(url);
+
+  return {
+    type: FETCH_GENRES,
     payload: request
   };
 }

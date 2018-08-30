@@ -76,10 +76,15 @@ body {
   margin: 0px 10px 50px 10px;
   box-shadow: 0px 0px 30px 0px rgba(255, 255, 255, 0.3);
   overflow: hidden;
+  border-radius: 5px;
 }
 
-.poster,
-.movie-list-item > div::after {
+.card {
+  border: none;
+  border-radius: 0px;
+}
+
+.poster {
   transition: all 0.3s ease-in-out;
 }
 
@@ -88,25 +93,12 @@ body {
   transform: scale(1.1);
 }
 
-.movie-list-item:hover .image-container::after {
-  opacity: 0.5;
-}
-
-.image-container {
-  position: relative;
-  bottom: 0px;
-  width: 100%;
-  height: 100%;
-}
-
-.image-container::after {
-  cursor: pointer;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0);
+.card-img-overlay {
   opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.movie-list-item:hover .card-img-overlay {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.5);
 }
