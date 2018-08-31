@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const FETCH_MOVIES = "FETCH_MOVIES";
 export const FETCH_MOVIE = "FETCH_MOVIE";
+export const FETCH_MOVIE_DETAILS = "FETCH_MOVIE_DETAILS";
 export const FETCH_GENRES = "FETCH_GENRES";
 export const CHANGE_TYPE = "CHANGE_TYPE";
 
@@ -33,6 +34,16 @@ export function fetchGenres() {
 
   return {
     type: FETCH_GENRES,
+    payload: request
+  };
+}
+
+export function fetchSingleMovie(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  const request = axios.get(url);
+
+  return {
+    type: FETCH_MOVIE_DETAILS,
     payload: request
   };
 }

@@ -1,25 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxPromise from "redux-promise";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import MovieList from "./containers/movie-list.js";
-import Categories from "./containers/categories.js";
-import SearchBar from "./containers/search-bar.js";
 import reducers from "./reducers";
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <SearchBar />
-        <Categories />
-        <MovieList />
-      </div>
-    );
-  }
-}
+import MovieDetailContainer from "./components/movie-detail-container";
+import MainView from "./components/main-view";
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -30,7 +18,12 @@ ReactDOM.render(
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )}
   >
-    <App />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/movie/:title" component={MovieDetailContainer} />
+        <Route exact path="/" component={MainView} />
+      </Switch>
+    </BrowserRouter>
   </Provider>,
   document.querySelector(".container")
 );

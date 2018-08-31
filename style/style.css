@@ -8,10 +8,15 @@ body {
 }
 
 .container {
-  background-color: #0e0e0e;
-  max-width: 90%;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100vw;
 }
 
+.main-wrapper {
+  max-width: 90%;
+  margin: auto;
+}
 .search-bar-form {
   background-color: #1a1919;
   height: 50px;
@@ -101,4 +106,71 @@ body {
 .movie-list-item:hover .card-img-overlay {
   opacity: 1;
   background: rgba(0, 0, 0, 0.5);
+}
+
+a,
+a:hover {
+  color: #ffffff;
+}
+
+.movie-details-wrapper {
+  margin: 0px auto;
+  width: 90vw;
+}
+
+.back-button {
+  cursor: pointer;
+  margin: 20px 0px;
+  width: 200px;
+  border: none;
+  background-color: #0e0e0e;
+  padding: 0px;
+}
+
+.back-button:focus {
+  outline: none;
+}
+
+.back-button > i {
+  color: #ffffff;
+}
+
+.movie-details-container {
+  background-color: #0e0e0e;
+  display: grid;
+  grid-template-columns: 540px 1fr;
+}
+
+.poster-container {
+  margin: 20px;
+}
+
+.movie-title-container {
+  margin: 0px 0px 20px 0px;
+}
+
+.right-container {
+  margin: 20px;
+}
+
+.title-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.rating-votes {
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.rating-votes > i {
+  color: #f3cc02;
+  margin-bottom: 12px;
+  padding: 5px;
+  box-sizing: content-box;
 }
