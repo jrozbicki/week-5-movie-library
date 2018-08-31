@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 class MovieDetailData extends Component {
   releaseYear() {
@@ -14,6 +14,18 @@ class MovieDetailData extends Component {
           return obj.name;
         })
         .join(" • ");
+    }
+  }
+
+  renderTrailer() {
+    if (this.props.trailers.results) {
+      console.log(this.props.trailers.results);
+      const key = _.find(this.props.trailers.results, { type: "Trailer" }).key;
+      return (
+        <Fragment>
+          <iframe type="text/html" width="420" height="315" src={`https://www.youtube.com/embed/${key}`} />
+        </Fragment>
+      );
     }
   }
 
@@ -44,7 +56,10 @@ class MovieDetailData extends Component {
             <h4>Genres:</h4>
             <p>{this.renderGenres()}</p>
           </div>
-          <div className="trailer" />
+          <div className="trailer">
+            <h4>Trailer:</h4>
+            {this.renderTrailer()}
+          </div>
         </div>
       </div>
     );

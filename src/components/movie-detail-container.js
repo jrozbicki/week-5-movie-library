@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import MovieDetailData from "../containers/detailView/movie-detail-data";
-import { fetchSingleMovie } from "../actions";
+import { fetchSingleMovie, fetchTrailers } from "../actions";
 
 const Background = styled.div`
   background: url("https://image.tmdb.org/t/p/w1280${props => props.backdropPath}");
@@ -18,7 +18,9 @@ const Background = styled.div`
 
 class MovieDetailContainer extends Component {
   componentDidMount() {
-    this.props.fetchSingleMovie(this.props.location.state.movieId);
+    const id = this.props.location.state.movieId;
+    this.props.fetchSingleMovie(id);
+    this.props.fetchTrailers(id);
   }
 
   render() {
@@ -30,7 +32,7 @@ class MovieDetailContainer extends Component {
               <i className="fas fa-long-arrow-alt-left fa-3x" />
             </button>
           </Link>
-          <MovieDetailData movieDetail={this.props.movieDetail} />
+          <MovieDetailData movieDetail={this.props.movieDetail} trailers={this.props.trailers} />
         </div>
       </Background>
     );
@@ -39,11 +41,12 @@ class MovieDetailContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    movieDetail: state.singleMovie
+    movieDetail: state.singleMovie,
+    trailers: state.trailers
   };
 }
 
 export default connect(
   mapStateToProps,
-  { fetchSingleMovie }
+  { fetchSingleMovie, fetchTrailers }
 )(MovieDetailContainer);
