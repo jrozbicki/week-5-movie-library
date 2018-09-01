@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchData } from "../../actions/index.js";
+import { fetchData, setCategory } from "../../actions/index.js";
 
 class Categories extends Component {
   constructor(props) {
@@ -10,34 +10,47 @@ class Categories extends Component {
     this.onClickHandle = this.onClickHandle.bind(this);
   }
 
-  componentWillMount() {
-    this.props.fetchData("popular");
+  componentDidMount() {
+    this.props.fetchData(this.props.selectedCategory);
   }
 
   onClickHandle(e) {
-    this.props.fetchData(e.target.id);
-    Array.from(e.target.parentNode.childNodes).map(li => {
-      if (li.classList.contains("selected-category")) {
-        li.classList.remove("selected-category");
-      }
+    const { id } = e.target;
+    this.props.fetchData(id).then(() => {
+      this.props.setCategory(id);
     });
-    e.target.classList.add("selected-category");
   }
 
   render() {
     return (
       <Fragment>
         <ul className="categories">
-          <li id="popular" className="category-item selected-category" onClick={this.onClickHandle}>
+          <li
+            id="popular"
+            className={`category-item ${this.props.selectedCategory === "popular" && "selected-category"}`}
+            onClick={this.onClickHandle}
+          >
             Popular
           </li>
-          <li id="top_rated" className="category-item" onClick={this.onClickHandle}>
+          <li
+            id="top_rated"
+            className={`category-item ${this.props.selectedCategory === "top_rated" && "selected-category"}`}
+            onClick={this.onClickHandle}
+          >
             Top Rated
           </li>
-          <li id="now_playing" className="category-item" onClick={this.onClickHandle}>
+          <li
+            id="now_playing"
+            className={`category-item ${this.props.selectedCategory === "now_playing" && "selected-category"}`}
+            onClick={this.onClickHandle}
+          >
             Now Playing
           </li>
-          <li id="upcoming" className="category-item" onClick={this.onClickHandle}>
+          <li
+            id="upcoming"
+            className={`category-item ${this.props.selectedCategory === "upcoming" && "selected-category"}`}
+            onClick={this.onClickHandle}
+          >
             Up Coming
           </li>
         </ul>
@@ -47,10 +60,16 @@ class Categories extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchData }, dispatch);
+  return bindActionCreators({ fetchData, setCategory }, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    selectedCategory: state.selectedCategory
+  };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Categories);

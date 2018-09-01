@@ -19,7 +19,6 @@ class MovieDetailData extends Component {
 
   renderTrailer() {
     if (this.props.trailers.results) {
-      console.log(this.props.trailers.results);
       const key = _.find(this.props.trailers.results, { type: "Trailer" }).key;
       return (
         <Fragment>

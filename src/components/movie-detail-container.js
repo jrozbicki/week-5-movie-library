@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import MovieDetailData from "../containers/detailView/movie-detail-data";
-import { fetchSingleMovie, fetchTrailers } from "../actions";
+import { fetchSingleMovie, fetchTrailers, clearMovieData } from "../actions";
 
 const Background = styled.div`
   background: url("https://image.tmdb.org/t/p/w1280${props => props.backdropPath}");
@@ -21,6 +21,10 @@ class MovieDetailContainer extends Component {
     const id = this.props.location.state.movieId;
     this.props.fetchSingleMovie(id);
     this.props.fetchTrailers(id);
+  }
+
+  componentWillUnmount() {
+    this.props.clearMovieData();
   }
 
   render() {
@@ -48,5 +52,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchSingleMovie, fetchTrailers }
+  { fetchSingleMovie, fetchTrailers, clearMovieData }
 )(MovieDetailContainer);

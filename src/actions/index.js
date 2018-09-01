@@ -5,6 +5,8 @@ export const FETCH_MOVIE = "FETCH_MOVIE";
 export const FETCH_MOVIE_DETAILS = "FETCH_MOVIE_DETAILS";
 export const FETCH_TRAILES = "FETCH_TRAILES";
 export const CHANGE_TYPE = "CHANGE_TYPE";
+export const CLEAR_MOVIE_DATA = "CLEAR_MOVIE_DATE";
+export const SET_CATEGORY = "SELECTED_CATEGORY";
 
 const API_KEY = "fd067333da9722a67e0a78739ccecbf1";
 
@@ -45,5 +47,18 @@ export function fetchTrailers(movieId) {
   return {
     type: FETCH_TRAILES,
     payload: request
+  };
+}
+
+export function clearMovieData() {
+  return {
+    type: CLEAR_MOVIE_DATA
+  };
+}
+
+export function setCategory(cat) {
+  return {
+    type: SET_CATEGORY,
+    payload: cat
   };
 }
